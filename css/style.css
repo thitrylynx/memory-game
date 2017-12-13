@@ -1,0 +1,59 @@
+body {
+  font-family: 'Open Sans', 'Arial', sans-serif;
+  font-size: 15px;
+  background-color: #1c7430;
+}
+
+@font-face {
+  font-weight: normal;
+  font-family: 'Open Sans';
+  font-style: normal;
+  src: url('../fonts/opensans.woff') format('woff2'), url('../fonts/opensans.woff2') format('woff');
+}
+
+@font-face {
+  font-weight: 700;
+  font-family: 'Open Sans';
+  font-style: normal;
+  src: url('../fonts/opensansbold.woff') format('woff2'),
+    url('../fonts/opensansbold.woff2') format('woff');
+}
+
+.start-page {
+  width: 505px;
+  min-height: 380px;
+  margin: 94px auto 0 auto;
+}
+.start-page__logo {
+}
+.start-page__title {
+  margin: 20px auto 34px auto;
+  opacity: 0.85;
+  font-size: 28px;
+  font-weight: bold;
+  color: #ffffff;
+  letter-spacing: 0.2px;
+  line-height: 38px;
+  text-transform: uppercase;
+  text-align: center;
+}
+.start-page_button {
+  display: block;
+  width: 144px;
+  height: 42px;
+  margin: 0 auto;
+  opacity: 0.85;
+  font-size: 16px;
+  font-weight: bold;
+  color: #1c7430;
+  letter-spacing: 0;
+  background: #ffffff;
+  border: 0 solid black;
+  border-radius: 4px;
+}
+.start-page_button:hover {
+  opacity: 0.5;
+}
+.start-page_button:active {
+  opacity: 0.9;
+}
