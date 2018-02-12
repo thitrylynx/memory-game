@@ -8,23 +8,36 @@ body {
   font-weight: normal;
   font-family: 'Open Sans';
   font-style: normal;
-  src: url('../fonts/opensans.woff') format('woff2'), url('../fonts/opensans.woff2') format('woff');
+  src: url('../fonts/opensans.woff') format('woff'), url('../fonts/opensans.woff2') format('woff2');
+}
+
+@font-face {
+  font-weight: 600;
+  font-family: 'Open Sans';
+  font-style: normal;
+  src: url('../fonts/opensanssemibold.woff') format('woff');
 }
 
 @font-face {
   font-weight: 700;
   font-family: 'Open Sans';
   font-style: normal;
-  src: url('../fonts/opensansbold.woff') format('woff2'),
-    url('../fonts/opensansbold.woff2') format('woff');
+  src: url('../fonts/opensansbold.woff') format('woff'),
+    url('../fonts/opensansbold.woff2') format('woff2');
+}
+.wrapper {
+  width: 700px;
+  margin: 0 auto;
 }
 
 .start-page {
-  width: 505px;
-  min-height: 380px;
-  margin: 94px auto 0 auto;
+  display: none;
+  margin-top: 94px;
 }
+
 .start-page__logo {
+  display: block;
+  margin: 0 auto;
 }
 .start-page__title {
   margin: 20px auto 34px auto;
@@ -56,4 +69,52 @@ body {
 }
 .start-page_button:active {
   opacity: 0.9;
+}
+
+.game-page {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 54px;
+}
+.game-page_button {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 19px;
+  color: #ffffff;
+  opacity: 0.8;
+  letter-spacing: 0.25px;
+  border: 0;
+  padding: 0;
+  background-color: transparent;
+}
+
+.game-page p {
+  margin-left: 534px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 0px;
+  color: #ffffff;
+  opacity: 0.8;
+  letter-spacing: 0.25px;
+}
+.game-page_cards-area {
+  width: 100%;
+}
+.game-page_cards-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 0;
+  padding: 0;
+}
+.game-page_cards-list li {
+  width: 100px;
+  height: 140px;
+  margin-right: 7px;
+  margin-top: 19px;
+  background-color: teal;
+  list-style: none;
+  background-image: url('../img/playingcard-back.jpg');
+  background-size: contain;
+  background-repeat: no-repeat;
 }
