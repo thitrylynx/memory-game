@@ -78,7 +78,6 @@ body {
 /* Игровая страница */
 .game-page {
   display: flex;
-  display: none;
   flex-wrap: wrap;
   margin-top: 54px;
 }
@@ -137,7 +136,6 @@ body {
 /* Страница счет */
 
 .end-page {
-  display: none;
   margin-top: 74px;
 }
 
@@ -187,4 +185,8 @@ body {
 
 .end-page_button:active {
   opacity: 0.9;
+}
+
+.hidden {
+  display: none;
 }
