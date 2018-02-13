@@ -30,8 +30,8 @@ body {
   margin: 0 auto;
 }
 
+/* Главная страница */
 .start-page {
-  display: none;
   margin-top: 94px;
 }
 
@@ -39,6 +39,7 @@ body {
   display: block;
   margin: 0 auto;
 }
+
 .start-page__title {
   margin: 20px auto 34px auto;
   opacity: 0.85;
@@ -50,6 +51,7 @@ body {
   text-transform: uppercase;
   text-align: center;
 }
+
 .start-page_button {
   display: block;
   width: 144px;
@@ -64,18 +66,23 @@ body {
   border: 0 solid black;
   border-radius: 4px;
 }
+
 .start-page_button:hover {
   opacity: 0.5;
 }
+
 .start-page_button:active {
   opacity: 0.9;
 }
 
+/* Игровая страница */
 .game-page {
   display: flex;
+  display: none;
   flex-wrap: wrap;
   margin-top: 54px;
 }
+
 .game-page_button {
   font-size: 14px;
   font-weight: 600;
@@ -97,9 +104,11 @@ body {
   opacity: 0.8;
   letter-spacing: 0.25px;
 }
+
 .game-page_cards-area {
   width: 100%;
 }
+
 .game-page_cards-list {
   display: flex;
   flex-wrap: wrap;
@@ -107,14 +116,75 @@ body {
   margin: 0;
   padding: 0;
 }
+
 .game-page_cards-list li {
   width: 100px;
-  height: 140px;
+  height: 138px;
   margin-right: 7px;
   margin-top: 19px;
-  background-color: teal;
   list-style: none;
-  background-image: url('../img/playingcard-back.jpg');
+  background-image: url('../img/PlayingCardBack.jpg');
   background-size: contain;
   background-repeat: no-repeat;
+}
+
+@media (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi), (min-resolution: 1.5dppx) {
+  .game-page_cards-list li {
+    background-image: url('../img/PlayingCardBack@2x.jpg');
+  }
+}
+
+/* Страница счет */
+
+.end-page {
+  display: none;
+  margin-top: 74px;
+}
+
+.end-page__logo {
+  display: block;
+  margin: 0 auto;
+}
+
+.end-page__intro,
+.end-page__score-text {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+  opacity: 0.85;
+  color: #ffffff;
+  letter-spacing: 0.15px;
+  line-height: 35px;
+  text-align: center;
+}
+
+.end-page__intro {
+  margin-top: 9px;
+}
+
+.end-page__score-text {
+  text-align: center;
+}
+
+.end-page_button {
+  display: block;
+  width: 128px;
+  height: 42px;
+  margin: 40px auto 0 auto;
+  font-size: 16px;
+  font-weight: 700;
+  color: #1c7430;
+  letter-spacing: 0;
+  opacity: 0.85;
+  background: #ffffff;
+  border-radius: 4px;
+  border: 0;
+}
+
+.end-page_button:hover {
+  opacity: 0.5;
+}
+
+.end-page_button:active {
+  opacity: 0.9;
 }
