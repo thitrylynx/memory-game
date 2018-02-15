@@ -73,11 +73,15 @@ function compareRandom() {
 }
 function mixRandomArray(array) {
   var uniqueCards = 9;
-  var mixedArray = array.sort(compareRandom);
-  var cutArray = mixedArray.slice(0, uniqueCards);
-  return cutArray;
+  return array.sort(compareRandom).slice(0, uniqueCards);
 }
 
-mixRandomArray(cards);
+// склейка двух случайных массивов
 
-var mas = mas1;
+function concatArrays() {
+  var primaryArray = mixRandomArray(cards);
+  var secondaryArray = primaryArray.slice().sort();
+  return primaryArray.concat(secondaryArray);
+}
+
+concatArrays();
