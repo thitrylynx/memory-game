@@ -94,6 +94,8 @@ function createCardEl(cardEl) {
   var newCard = document.createElement('li');
   newCard.style.backgroundImage = "url('img/Cards/" + cardEl + ".png')";
   newCard.setAttribute('tabindex', '0');
+  newCard.classList.add('game-page_card');
+  newCard.dataset.cardId = cardEl;
   return newCard;
 }
 
