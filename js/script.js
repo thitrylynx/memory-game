@@ -110,4 +110,25 @@ function renderCardList(array) {
   cardList.appendChild(fragment);
 }
 
-renderCardList(cardArray);
+// отрисовка, сокрытие DOM элементов (возможно конструктор)
+
+var gameOptions = {
+  renderCards: function() {
+    renderCardList(cardArray);
+
+    if (typeof gameOptions.hideCards === 'function') {
+      setTimeout(function() {
+        var cardsElements = cardList.querySelectorAll('.game-page_card');
+        gameOptions.hideCards(cardsElements);
+      }, 5000);
+    }
+  },
+
+  hideCards: function(elements) {
+    elements.forEach(function(element) {
+      element.classList.add('game-page_card--card-back');
+    });
+  }
+};
+
+gameOptions.renderCards();
