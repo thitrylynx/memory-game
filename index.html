@@ -12,7 +12,7 @@
 <body>
   <div class="wrapper">
 
-    <section class="start-page">
+    <section class="start-page hidden">
       <picture>
         <source srcset="img/StartGame@2x.png 2x, img/StartGame.png 1x" />
         <img class="start-page__logo" src="img/StartGame.png" width="516 " height="275" alt="Изображение четырех карт">
@@ -21,31 +21,13 @@
       <button class="start-page_button">Начать игру</button>
     </section>
 
-    <section class="game-page hidden">
+    <section class="game-page">
       <button class="game-page_button">Начать заново</button>
       <p>Очки:
         <span class="game-page_score-number">0</span>
       </p>
       <div class="game-page_cards-area">
         <ul class="game-page_cards-list">
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
         </ul>
       </div>
     </section>
@@ -63,7 +45,7 @@
     </section>
 
   </div>
-
+  <script src="./js/utils.js"></script>
   <script src="js/script.js "></script>
 </body>
 

@@ -84,4 +84,28 @@ function concatArrays() {
   return primaryArray.concat(secondaryArray);
 }
 
-concatArrays();
+var cardArray = concatArrays();
+
+var cardList = document.querySelector('.game-page_cards-list');
+
+// создание элемента карты
+
+function createCardEl(cardEl) {
+  var newCard = document.createElement('li');
+  newCard.style.backgroundImage = "url('img/Cards/" + cardEl + ".png')";
+  newCard.setAttribute('tabindex', '0');
+  return newCard;
+}
+
+// добавление карт в DOM
+
+function renderCardList(array) {
+  var fragment = document.createDocumentFragment();
+  array.forEach(function(card) {
+    var cardElement = createCardEl(card);
+    fragment.appendChild(cardElement);
+  });
+  cardList.appendChild(fragment);
+}
+
+renderCardList(cardArray);
