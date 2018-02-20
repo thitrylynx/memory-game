@@ -129,6 +129,9 @@ body {
 .game-page_cards-list .game-page_card--card-back[style] {
   background-image: url('../img/PlayingCardBack.jpg') !important;
 }
+.game-page_cards-list .game-page_card--card-none[style] {
+  background-image: none !important;
+}
 @media (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi), (min-resolution: 1.5dppx) {
   .game-page_cards-list .game-page_card--card-back {
     background-image: url('../img/PlayingCardBack@2x.jpg') !important;

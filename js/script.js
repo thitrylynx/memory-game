@@ -96,6 +96,7 @@ function createCardEl(cardEl) {
   newCard.setAttribute('tabindex', '0');
   newCard.classList.add('game-page_card');
   newCard.dataset.cardId = cardEl;
+  newCard.dataset.cardStatus = 0;
   return newCard;
 }
 
@@ -142,28 +143,50 @@ gameOptions.renderCards();
 var numberClick = 1;
 var countClick = 0;
 var lastImg;
-var activateCard = function(evt) {
+
+// newCard.setAttribute('data-card-status', 1);
+
+// data-status: 0 - не используется, 1 - проверка, 2 - закрыта
+
+var selectCard = function(evt) {
   var target = evt.target;
 
   if (target.classList.contains('game-page_card--card-back') && numberClick === 1) {
     if (countClick === 0) {
       countClick++;
       target.classList.remove('game-page_card--card-back');
+      target.setAttribute('data-card-status', 1);
       lastImg = target.getAttribute('data-card-id');
     } else {
       var newImg = target.getAttribute('data-card-id');
+
       if (lastImg === newImg) {
         target.classList.remove('game-page_card--card-back');
-      } else {
-        target.classList.remove('game-page_card--card-back');
+        target.setAttribute('data-card-status', 1);
         numberClick = 0;
         setTimeout(function() {
           var cardListOpen = document.querySelectorAll('.game-page_card');
           cardListOpen.forEach(function(element) {
-            if (element.classList.contains('game-page_card--card-back')) {
-              return false;
-            } else {
+            var attrr = element.getAttribute('data-card-status');
+            if (attrr == 1) {
+              element.classList.add('game-page_card--card-none');
+              element.setAttribute('data-card-status', 2);
+              element.setAttribute('tabindex', '');
+            }
+          });
+          numberClick = 1;
+        }, 1000);
+      } else {
+        target.classList.remove('game-page_card--card-back');
+        target.setAttribute('data-card-status', 1);
+        numberClick = 0;
+        setTimeout(function() {
+          var cardListOpen = document.querySelectorAll('.game-page_card');
+          cardListOpen.forEach(function(element) {
+            var attr = element.getAttribute('data-card-status');
+            if (attr == 1) {
               element.classList.add('game-page_card--card-back');
+              element.setAttribute('data-card-status', 0);
             }
           });
           numberClick = 1;
@@ -174,7 +197,7 @@ var activateCard = function(evt) {
   }
 };
 
-document.addEventListener('click', activateCard);
+document.addEventListener('click', selectCard);
 // $('.igra_pamyat div').click(function(){ //Клик на игровом поле
 
 //      if( $(this).data('state') == 0 && click_flag == 1 ){ //Если ячейка закрыта
