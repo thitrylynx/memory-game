@@ -117,18 +117,9 @@ var gameOptions = {
   renderCards: function() {
     renderCardList(cardArray);
 
-    if (typeof gameOptions.hideCard === 'function') {
-      setTimeout(function() {
-        var cardsElements = cardList.querySelectorAll('.game-page_card');
-        gameOptions.hideCard(cardsElements);
-      }, 1000);
-    }
-  },
-
-  hideCard: function(elements) {
-    elements.forEach(function(element) {
-      element.classList.add('game-page_card--card-back');
-    });
+    setTimeout(function() {
+      gameOptions.closeOrDeleteCard('', '', 'game-page_card--card-back', 0);
+    }, 1000);
   },
 
   showCard: function(element) {
@@ -136,14 +127,14 @@ var gameOptions = {
     element.setAttribute('data-card-status', 1);
   },
 
-  closeOrDeleteCard: function(cardStatus, tabIndex, className) {
+  closeOrDeleteCard: function(cardStatus, tabIndex, className, attribute) {
     var cardListOpen = document.querySelectorAll('.game-page_card');
     cardListOpen.forEach(function(element) {
-      var attrr = element.getAttribute('data-card-status');
-      if (attrr == 1) {
-        element.classList.add(className);
+      var attr = element.getAttribute('data-card-status');
+      if (attr == attribute) {
         element.setAttribute('data-card-status', cardStatus);
         element.setAttribute('tabindex', tabIndex);
+        element.classList.add(className);
       }
     });
   }
@@ -173,7 +164,7 @@ var selectCard = function(evt) {
         clickability = 0;
 
         setTimeout(function() {
-          gameOptions.closeOrDeleteCard(2, '', 'game-page_card--card-none');
+          gameOptions.closeOrDeleteCard(2, '', 'game-page_card--card-none', 1);
           clickability = 1;
         }, 300);
       } else {
@@ -181,7 +172,7 @@ var selectCard = function(evt) {
         clickability = 0;
 
         setTimeout(function() {
-          gameOptions.closeOrDeleteCard(0, '', 'game-page_card--card-back');
+          gameOptions.closeOrDeleteCard(0, '', 'game-page_card--card-back', 1);
           clickability = 1;
         }, 300);
       }
@@ -191,41 +182,6 @@ var selectCard = function(evt) {
 };
 
 document.addEventListener('click', selectCard);
-
-// $('.igra_pamyat div').click(function(){ //Клик на игровом поле
-
-//      if( $(this).data('state') == 0 && click_flag == 1 ){ //Если ячейка закрыта
-
-//          if( count_click == 0 ){ //Если первый клик по закрытому полю
-//              count_click++;
-//              last_img = $(this).attr('class');
-//              $(this).data('state',1).attr('data-state',1).css('backgroundImage', 'url(' + img_root + last_img.substr(3,1) + '.jpg)');
-//          }else{
-
-//              //Если картинки совпадают
-//              if( last_img == $(this).attr('class')  ){
-//                  $('.' + last_img).data('state',2).attr('data-state',2).css('backgroundImage', 'url(' + img_root + last_img.substr(3,1) + '.jpg)');
-//              }else{
-
-//                  $(this).data('state', 1).attr('data-state',1).css('backgroundImage', 'url(' + img_root + $(this).attr('class').substr(3,1) + '.jpg)');
-
-//                   click_flag = 0;
-
-//                  function hide_img() { //Делаем задержку
-//                      $('.igra_pamyat div').each(function(){
-//                          if( $(this).data('state') == 1 ){
-//                              $(this).data('state',0).attr('data-state',0).css('backgroundImage', 'none');
-//                          }
-//                      });
-//                       click_flag = 1;
-//                  }
-//                  setTimeout(hide_img, 1000);
-//              }
-//              count_click = 0;
-//          }
-//      }
-//  });
-// });
 
 // var cityPinMapClickHandler = function (evt) {
 //   activateDialog(evt, data);
