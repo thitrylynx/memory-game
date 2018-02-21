@@ -3,122 +3,19 @@
 var startPage = document.querySelector('.start-page');
 var gamePage = document.querySelector('.game-page');
 var startButton = startPage.querySelector('.start-page_button');
+var restart = document.querySelector('.game-page_button');
 
-startButton.addEventListener('click', function() {
-  gamePage.classList.remove('hidden');
-  startPage.classList.add('hidden');
-});
-
-// сортировка
-
-var cards = [
-  '0C',
-  '0D',
-  '0H',
-  '0S',
-  '2C',
-  '2D',
-  '2H',
-  '2S',
-  '3C',
-  '3D',
-  '3H',
-  '3S',
-  '4C',
-  '4D',
-  '4H',
-  '4S',
-  '5C',
-  '5D',
-  '5H',
-  '5S',
-  '6C',
-  '6D',
-  '6H',
-  '6S',
-  '7C',
-  '7D',
-  '7H',
-  '7S',
-  '8C',
-  '8D',
-  '8H',
-  '8S',
-  '9C',
-  '9D',
-  '9H',
-  '9S',
-  'AC',
-  'AD',
-  'AH',
-  'AS',
-  'JC',
-  'JD',
-  'JH',
-  'JS',
-  'KC',
-  'KD',
-  'KH',
-  'KS',
-  'QC',
-  'QD',
-  'QH',
-  'QS'
-];
-
-// отбор 9 случайных карт
-
-function compareRandom() {
-  return Math.random() - 0.5;
-}
-function mixRandomArray(array) {
-  var uniqueCards = 9;
-  return array.sort(compareRandom).slice(0, uniqueCards);
-}
-
-// склейка двух случайных массивов
-
-function concatArrays() {
-  var primaryArray = mixRandomArray(cards);
-  var secondaryArray = primaryArray.slice().sort();
-  return primaryArray.concat(secondaryArray);
-}
-
-var cardArray = concatArrays();
-
-var cardList = document.querySelector('.game-page_cards-list');
-
-// создание элемента карты
-
-function createCardEl(cardEl) {
-  var newCard = document.createElement('li');
-  newCard.style.backgroundImage = "url('img/Cards/" + cardEl + ".png')";
-  newCard.setAttribute('tabindex', '0');
-  newCard.classList.add('game-page_card');
-  newCard.dataset.cardId = cardEl;
-  newCard.dataset.cardStatus = 0;
-  return newCard;
-}
-
-// добавление карт в DOM
-
-function renderCardList(array) {
-  var fragment = document.createDocumentFragment();
-  array.forEach(function(card) {
-    var cardElement = createCardEl(card);
-    fragment.appendChild(cardElement);
-  });
-  cardList.appendChild(fragment);
-}
-
-// отрисовка, сокрытие DOM элементов (возможно конструктор)
+var clickability = 1;
+var countClick = 0;
+var lastCard;
+var score;
 
 var gameOptions = {
   renderCards: function() {
-    renderCardList(cardArray);
+    window.card.renderCardList();
 
     setTimeout(function() {
-      gameOptions.closeOrDeleteCard('', '', 'game-page_card--card-back', 0);
+      gameOptions.closeOrDeleteCard('', 0, 'game-page_card--card-back', 0);
     }, 1000);
   },
 
@@ -126,6 +23,15 @@ var gameOptions = {
     element.classList.remove('game-page_card--card-back');
     element.setAttribute('data-card-status', 1);
   },
+
+  /*
+     * Закрытие или удаление согласно входящим параметрам
+     *
+     * @param {number} cardStatus состояние карты
+     * @param {string} tabIndex 
+     * @param {string} className имя класса 
+     * @param {string} attribute 
+     */
 
   closeOrDeleteCard: function(cardStatus, tabIndex, className, attribute) {
     var cardListOpen = document.querySelectorAll('.game-page_card');
@@ -137,64 +43,76 @@ var gameOptions = {
         element.classList.add(className);
       }
     });
-  }
-};
+  },
 
-gameOptions.renderCards();
+  // data-status: 0 - не используется, 1 - проверка, 2 - удалена
+  selectCard: function(evt) {
+    var target = evt.target;
 
-var clickability = 1;
-var countClick = 0;
-var lastCard;
-
-// data-status: 0 - не используется, 1 - проверка, 2 - удалена
-
-var selectCard = function(evt) {
-  var target = evt.target;
-
-  if (target.classList.contains('game-page_card--card-back') && clickability === 1) {
-    if (countClick == 0) {
-      countClick++;
-      gameOptions.showCard(target);
-      lastCard = target.getAttribute('data-card-id');
-    } else {
-      var newCard = target.getAttribute('data-card-id');
-
-      if (lastCard === newCard) {
+    if (
+      target.classList.contains('game-page_card--card-back') &&
+      clickability == window.utils.CLICKABILITY_STATE.ABLE
+    ) {
+      if (countClick == window.utils.COUNT_CLICK.ZERO) {
+        countClick++;
         gameOptions.showCard(target);
-        clickability = 0;
-
-        setTimeout(function() {
-          gameOptions.closeOrDeleteCard(2, '', 'game-page_card--card-none', 1);
-          clickability = 1;
-        }, 300);
+        lastCard = target.getAttribute('data-card-id');
       } else {
-        gameOptions.showCard(target);
-        clickability = 0;
+        var newCard = target.getAttribute('data-card-id');
 
-        setTimeout(function() {
-          gameOptions.closeOrDeleteCard(0, '', 'game-page_card--card-back', 1);
-          clickability = 1;
-        }, 300);
+        if (lastCard == newCard) {
+          gameOptions.showCard(target);
+          clickability = window.utils.CLICKABILITY_STATE.UNABLE;
+
+          setTimeout(function() {
+            gameOptions.closeOrDeleteCard(
+              2,
+              '',
+              'game-page_card--card-none',
+              window.utils.COUNT_CLICK.SINGLE
+            );
+            clickability = window.utils.CLICKABILITY_STATE.ABLE;
+          }, 300);
+        } else {
+          gameOptions.showCard(target);
+          clickability = window.utils.CLICKABILITY_STATE.UNABLE;
+
+          setTimeout(function() {
+            gameOptions.closeOrDeleteCard(
+              0,
+              0,
+              'game-page_card--card-back',
+              window.utils.COUNT_CLICK.SINGLE
+            );
+            clickability = window.utils.CLICKABILITY_STATE.ABLE;
+          }, 300);
+        }
+        countClick = window.utils.COUNT_CLICK.ZERO;
       }
-      countClick = 0;
     }
   }
 };
 
-document.addEventListener('click', selectCard);
+startButton.addEventListener('click', function() {
+  gamePage.classList.remove('hidden');
+  startPage.classList.add('hidden');
+  gameOptions.renderCards();
+});
 
-// var cityPinMapClickHandler = function (evt) {
-//   activateDialog(evt, data);
-// };
+restart.addEventListener('click', function() {
+  gameOptions.renderCards();
+});
 
-// var cityPinMapEnterPressHandler = function (evt) {
-//   if (evt.keyCode === window.utils.ENTER_KEYCODE) {
-//     activateDialog(evt, data);
-//   }
-// };
+var onClick = function(evt) {
+  gameOptions.selectCard(evt);
+  document.body.removeEventListener(window.utils.EVENT_TYPES.CLICK, onClick);
+};
 
-// showPins(data, 3);
+var onKeyDown = function(evt) {
+  if (evt.keyCode === window.utils.KEY_CODES.ENTER) {
+    gameOptions.selectCard(evt);
+  }
+};
 
-// cityMap.addEventListener('click', cityPinMapClickHandler);
-// cityMap.addEventListener('keydown', cityPinMapEnterPressHandler);
-// };
+document.addEventListener(window.utils.EVENT_TYPES.CLICK, onClick);
+document.body.addEventListener(window.utils.EVENT_TYPES.KEYDOWN, onKeyDown);

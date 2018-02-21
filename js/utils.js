@@ -1,40 +1,35 @@
 'use strict';
 
-window.utils = (function () {
+window.utils = (function() {
+  function compareRandom() {
+    return Math.random() - 0.5;
+  }
+  function mixRandomArray(array) {
+    var uniqueCards = 9;
+    return array.sort(compareRandom).slice(0, uniqueCards);
+  }
 
   return {
     EVENT_TYPES: {
       CLICK: 'click',
-      KEYDOWN: 'keydown',
-      MOUSEDOWN: 'mousedown',
-      MOUSEMOVE: 'mousemove',
-      MOUSEUP: 'mouseup'
+      KEYDOWN: 'keydown'
     },
     KEY_CODES: {
       ENTER: 13,
       ESC: 27
     },
-    removeClass: function (elements, className) {
-      for (var i = 0; i < elements.length; i++) {
-        if (elements[i].classList.contains(className)) {
-          elements[i].classList.remove(className);
-        }
-      }
+    CLICKABILITY_STATE: {
+      ABLE: 1,
+      UNABLE: 0
     },
-    removeChild: function (parent) {
-      while (parent.children.length !== 1) {
-        parent.removeChild(parent.children[1]);
-      }
+    COUNT_CLICK: {
+      ZERO: 0,
+      SINGLE: 1
     },
-    translate: function (value) {
-      switch (value) {
-        case 'flat':
-          return 'Квартира';
-        case 'house':
-          return 'Дом';
-        case 'bungalo':
-          return 'Бунгало';
-      } return value;
+    concatArrays: function(array) {
+      var primaryArray = mixRandomArray(array);
+      var secondaryArray = primaryArray.slice().sort();
+      return primaryArray.concat(secondaryArray);
     }
   };
 })();
