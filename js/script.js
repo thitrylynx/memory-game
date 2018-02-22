@@ -3,7 +3,7 @@
 var startPage = document.querySelector('.start-page');
 var gamePage = document.querySelector('.game-page');
 var startButton = startPage.querySelector('.start-page_button');
-var restart = document.querySelector('.game-page_button');
+var restartButton = document.querySelector('.game-page_button');
 
 var clickability = 1;
 var countClick = 0;
@@ -93,15 +93,22 @@ var gameOptions = {
   }
 };
 
-startButton.addEventListener('click', function() {
+function startGame() {
   gamePage.classList.remove('hidden');
   startPage.classList.add('hidden');
   gameOptions.renderCards();
-});
+  document.removeEventListener(window.utils.EVENT_TYPES.CLICK, startGame);
+}
 
-restart.addEventListener('click', function() {
+function restartGame() {
+  window.utils.removeChilds('.game-page_cards-list');
   gameOptions.renderCards();
-});
+  document.removeEventListener(window.utils.EVENT_TYPES.CLICK, restartGame);
+}
+
+startButton.addEventListener(window.utils.EVENT_TYPES.CLICK, startGame);
+
+restartButton.addEventListener(window.utils.EVENT_TYPES.CLICK, restartGame);
 
 var onClick = function(evt) {
   gameOptions.selectCard(evt);

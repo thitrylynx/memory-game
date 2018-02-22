@@ -30,6 +30,12 @@ window.utils = (function() {
       var primaryArray = mixRandomArray(array);
       var secondaryArray = primaryArray.slice().sort();
       return primaryArray.concat(secondaryArray);
+    },
+    removeChilds: function(className) {
+      var myNode = document.querySelector(className);
+      while (myNode.firstChild) {
+        myNode.removeChild(myNode.firstChild);
+      }
     }
   };
 })();
