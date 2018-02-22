@@ -9,15 +9,23 @@ var clickability = 1;
 var countClick = 0;
 var lastCard;
 var score;
+var timeoutId;
 
 var gameOptions = {
   renderCards: function() {
     window.card.renderCardList();
 
-    setTimeout(function() {
-      gameOptions.closeOrDeleteCard('', 0, 'game-page_card--card-back', 0);
-    }, 1000);
+    (function() {
+      timeoutId = setTimeout(function() {
+        gameOptions.closeOrDeleteCard('', 0, 'game-page_card--card-back', 0);
+      }, 5000);
+    })();
   },
+
+  //   var timeoutId = setTimeout(function() {
+  //     gameOptions.closeOrDeleteCard('', 0, 'game-page_card--card-back', 0);
+  //   }, 5000);
+  // },
 
   showCard: function(element) {
     element.classList.remove('game-page_card--card-back');
@@ -102,9 +110,12 @@ function startGame() {
 
 function restartGame() {
   window.utils.removeChilds('.game-page_cards-list');
+  clearTimeout(timeoutId);
   gameOptions.renderCards();
   document.removeEventListener(window.utils.EVENT_TYPES.CLICK, restartGame);
 }
+
+// var debounceUpdate = window.utils.debounce(restartGame);
 
 startButton.addEventListener(window.utils.EVENT_TYPES.CLICK, startGame);
 
