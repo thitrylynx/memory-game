@@ -2,10 +2,13 @@
 
 var startPage = document.querySelector('.start-page');
 var gamePage = document.querySelector('.game-page');
+var endPage = document.querySelector('.end-page');
+var endPageButton = document.querySelector('.end-page_button');
 var startButton = startPage.querySelector('.start-page_button');
 var restartButton = document.querySelector('.game-page_button');
 var score = document.querySelector('.game-page_score-number');
 var cardListAll = document.querySelector('.game-page_cards-list');
+var endScore = document.querySelector('.end-page__score');
 
 var clickability = 1;
 var countClick = 0;
@@ -19,7 +22,7 @@ var gameOptions = {
     (function() {
       timeoutId = setTimeout(function() {
         gameOptions.closeOrDeleteCard('', 0, 'game-page_card--card-back', 0);
-      }, 1000);
+      }, 5000);
     })();
   },
 
@@ -106,6 +109,12 @@ var gameOptions = {
             clickability = window.utils.CLICKABILITY_STATE.ABLE;
           }, 300);
         }
+        var dsdsd = document.querySelectorAll('[data-card-status="2"]').length;
+        if (document.querySelectorAll('[data-card-status="2"]').length == 16) {
+          gamePage.classList.add('hidden');
+          endPage.classList.remove('hidden');
+          endScore.textContent = score.textContent;
+        }
         countClick = window.utils.COUNT_CLICK.ZERO;
       }
     }
@@ -127,11 +136,22 @@ function restartGame() {
   document.removeEventListener(window.utils.EVENT_TYPES.CLICK, restartGame);
 }
 
+function oneMoreGame() {
+  endPage.classList.add('hidden');
+  gamePage.classList.remove('hidden');
+  window.utils.removeChilds('.game-page_cards-list');
+  score.textContent = 0;
+  gameOptions.renderCards();
+  document.removeEventListener(window.utils.EVENT_TYPES.CLICK, restartGame);
+}
+
 // var debounceUpdate = window.utils.debounce(restartGame);
 
 startButton.addEventListener(window.utils.EVENT_TYPES.CLICK, startGame);
 
 restartButton.addEventListener(window.utils.EVENT_TYPES.CLICK, restartGame);
+
+endPageButton.addEventListener(window.utils.EVENT_TYPES.CLICK, oneMoreGame);
 
 var onClick = function(evt) {
   gameOptions.selectCard(evt);
