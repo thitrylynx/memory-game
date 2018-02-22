@@ -4,11 +4,12 @@ var startPage = document.querySelector('.start-page');
 var gamePage = document.querySelector('.game-page');
 var startButton = startPage.querySelector('.start-page_button');
 var restartButton = document.querySelector('.game-page_button');
+var score = document.querySelector('.game-page_score-number');
+var cardListAll = document.querySelector('.game-page_cards-list');
 
 var clickability = 1;
 var countClick = 0;
 var lastCard;
-var score;
 var timeoutId;
 
 var gameOptions = {
@@ -18,7 +19,7 @@ var gameOptions = {
     (function() {
       timeoutId = setTimeout(function() {
         gameOptions.closeOrDeleteCard('', 0, 'game-page_card--card-back', 0);
-      }, 5000);
+      }, 1000);
     })();
   },
 
@@ -69,6 +70,9 @@ var gameOptions = {
         var newCard = target.getAttribute('data-card-id');
 
         if (lastCard == newCard) {
+          var cardsClose = cardListAll.getElementsByClassName('game-page_card--card-back').length;
+
+          score.textContent = +score.textContent + cardsClose * 42;
           gameOptions.showCard(target);
           clickability = window.utils.CLICKABILITY_STATE.UNABLE;
 
@@ -84,6 +88,13 @@ var gameOptions = {
         } else {
           gameOptions.showCard(target);
           clickability = window.utils.CLICKABILITY_STATE.UNABLE;
+          var elems = document.querySelectorAll('[data-card-status="2"]').length;
+
+          score.textContent = +score.textContent - elems * 42;
+
+          if (score.textContent < 0) {
+            score.textContent = 0;
+          }
 
           setTimeout(function() {
             gameOptions.closeOrDeleteCard(
@@ -110,6 +121,7 @@ function startGame() {
 
 function restartGame() {
   window.utils.removeChilds('.game-page_cards-list');
+  score.textContent = 0;
   clearTimeout(timeoutId);
   gameOptions.renderCards();
   document.removeEventListener(window.utils.EVENT_TYPES.CLICK, restartGame);
