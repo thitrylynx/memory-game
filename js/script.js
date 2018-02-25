@@ -22,7 +22,7 @@ var gameOptions = {
     (function() {
       timeoutId = setTimeout(function() {
         gameOptions.closeOrDeleteCard('', 0, 'game-page_card--card-back', 0);
-      }, 5000);
+      }, 1000);
     })();
   },
 
@@ -34,6 +34,7 @@ var gameOptions = {
   showCard: function(element) {
     element.classList.remove('game-page_card--card-back');
     element.setAttribute('data-card-status', 1);
+    element.style.transform = 'rotate("180deg")';
   },
 
   /*
@@ -109,7 +110,6 @@ var gameOptions = {
             clickability = window.utils.CLICKABILITY_STATE.ABLE;
           }, 300);
         }
-        var dsdsd = document.querySelectorAll('[data-card-status="2"]').length;
         if (document.querySelectorAll('[data-card-status="2"]').length == 16) {
           gamePage.classList.add('hidden');
           endPage.classList.remove('hidden');

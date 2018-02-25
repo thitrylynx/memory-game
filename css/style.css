@@ -81,6 +81,7 @@ body {
   display: flex;
   flex-wrap: wrap;
   margin-top: 54px;
+  perspective: 900px;
 }
 
 .game-page_button {
@@ -138,6 +139,17 @@ body {
   .game-page_cards-list .game-page_card--card-back {
     background-image: url('../img/PlayingCardBack@2x.jpg') !important;
   }
+}
+
+.game-page_card--card-back {
+  transform-style: preserve-3d;
+  transition: 0.5s;
+  transform: rotateY(180deg);
+}
+.game-page_card--card-open {
+  transform-style: preserve-3d;
+  transition: 0.5s;
+  transform: rotateY(-180deg);
 }
 
 /* Страница счет */
