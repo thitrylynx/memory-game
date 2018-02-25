@@ -166,13 +166,13 @@ function soundOpenCard() {
 }
 function soundCloseCard() {
   var audio = new Audio(); // Создаём новый элемент Audio
-  audio.src = 'audio/CloseCard.mp3'; // Указываем путь к звуку "клика"
+  audio.src = 'audio/closeCard.mp3'; // Указываем путь к звуку "клика"
   audio.autoplay = true; // Автоматически запускаем
   audio.volume = 0.05;
 }
 function soundEnd() {
   var audio = new Audio(); // Создаём новый элемент Audio
-  audio.src = 'audio/Finish.mp3'; // Указываем путь к звуку "клика"
+  audio.src = 'audio/finish.mp3'; // Указываем путь к звуку "клика"
   audio.autoplay = true; // Автоматически запускаем
   audio.volume = 0.05;
 }
