@@ -22,7 +22,7 @@ var gameOptions = {
     (function() {
       timeoutId = setTimeout(function() {
         gameOptions.closeOrDeleteCard('', 0, 'game-page_card--card-back', 0);
-      }, 1000);
+      }, 5000);
     })();
   },
 
@@ -48,9 +48,11 @@ var gameOptions = {
 
   closeOrDeleteCard: function(cardStatus, tabIndex, className, attribute) {
     var cardListOpen = document.querySelectorAll('.game-page_card');
+    soundCloseCard();
     cardListOpen.forEach(function(element) {
       var attr = element.getAttribute('data-card-status');
       if (attr == attribute) {
+        element.classList.remove('game-page_card--card-open');
         element.setAttribute('data-card-status', cardStatus);
         element.setAttribute('tabindex', tabIndex);
         element.classList.add(className);
@@ -68,7 +70,9 @@ var gameOptions = {
     ) {
       if (countClick == window.utils.COUNT_CLICK.ZERO) {
         countClick++;
+        soundOpenCard();
         gameOptions.showCard(target);
+        target.classList.add('game-page_card--card-open');
         lastCard = target.getAttribute('data-card-id');
       } else {
         var newCard = target.getAttribute('data-card-id');
@@ -77,7 +81,9 @@ var gameOptions = {
           var cardsClose = cardListAll.getElementsByClassName('game-page_card--card-back').length;
 
           score.textContent = +score.textContent + cardsClose * 42;
+          soundOpenCard();
           gameOptions.showCard(target);
+          target.classList.add('game-page_card--card-open');
           clickability = window.utils.CLICKABILITY_STATE.UNABLE;
 
           setTimeout(function() {
@@ -88,9 +94,11 @@ var gameOptions = {
               window.utils.COUNT_CLICK.SINGLE
             );
             clickability = window.utils.CLICKABILITY_STATE.ABLE;
-          }, 300);
+          }, 700);
         } else {
+          soundOpenCard();
           gameOptions.showCard(target);
+          target.classList.add('game-page_card--card-open');
           clickability = window.utils.CLICKABILITY_STATE.UNABLE;
           var elems = document.querySelectorAll('[data-card-status="2"]').length;
 
@@ -108,11 +116,12 @@ var gameOptions = {
               window.utils.COUNT_CLICK.SINGLE
             );
             clickability = window.utils.CLICKABILITY_STATE.ABLE;
-          }, 300);
+          }, 800);
         }
         if (document.querySelectorAll('[data-card-status="2"]').length == 16) {
           gamePage.classList.add('hidden');
           endPage.classList.remove('hidden');
+          soundEnd();
           endScore.textContent = score.textContent;
         }
         countClick = window.utils.COUNT_CLICK.ZERO;
@@ -131,6 +140,8 @@ function startGame() {
 function restartGame() {
   window.utils.removeChilds('.game-page_cards-list');
   score.textContent = 0;
+  clickability = 1;
+  countClick = 0;
   clearTimeout(timeoutId);
   gameOptions.renderCards();
   document.removeEventListener(window.utils.EVENT_TYPES.CLICK, restartGame);
@@ -143,6 +154,27 @@ function oneMoreGame() {
   score.textContent = 0;
   gameOptions.renderCards();
   document.removeEventListener(window.utils.EVENT_TYPES.CLICK, restartGame);
+}
+
+// ЗВУКИ
+
+function soundOpenCard() {
+  var audio = new Audio(); // Создаём новый элемент Audio
+  audio.src = 'audio/openCard3.mp3'; // Указываем путь к звуку "клика"
+  audio.autoplay = true; // Автоматически запускаем
+  audio.volume = 0.05;
+}
+function soundCloseCard() {
+  var audio = new Audio(); // Создаём новый элемент Audio
+  audio.src = 'audio/CloseCard.mp3'; // Указываем путь к звуку "клика"
+  audio.autoplay = true; // Автоматически запускаем
+  audio.volume = 0.05;
+}
+function soundEnd() {
+  var audio = new Audio(); // Создаём новый элемент Audio
+  audio.src = 'audio/Finish.mp3'; // Указываем путь к звуку "клика"
+  audio.autoplay = true; // Автоматически запускаем
+  audio.volume = 0.05;
 }
 
 // var debounceUpdate = window.utils.debounce(restartGame);
