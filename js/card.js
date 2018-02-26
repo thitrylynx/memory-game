@@ -77,6 +77,24 @@ window.card = (function() {
         fragment.appendChild(cardElement);
       });
       cardList.appendChild(fragment);
+    },
+    soundOpenCard: function() {
+      var audio = new Audio();
+      audio.src = 'sounds/openCard.mp3';
+      audio.autoplay = true;
+      audio.volume = 0.05;
+    },
+    soundCloseCard: function() {
+      var audio = new Audio();
+      audio.src = 'sounds/closeCard.mp3';
+      audio.autoplay = true;
+      audio.volume = 0.05;
+    },
+    soundEnd: function() {
+      var audio = new Audio();
+      audio.src = 'sounds/finish.mp3';
+      audio.autoplay = true;
+      audio.volume = 0.05;
     }
   };
 })();
