@@ -21,36 +21,18 @@
       <button class="start-page_button">Начать игру</button>
     </section>
 
-    <section class="game-page">
+    <section class="game-page hidden">
       <button class="game-page_button">Начать заново</button>
       <p>Очки:
         <span class="game-page_score-number">0</span>
       </p>
       <div class="game-page_cards-area">
         <ul class="game-page_cards-list">
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
         </ul>
       </div>
     </section>
 
-    <section class="end-page">
+    <section class="end-page hidden">
       <picture>
         <source srcset="img/EndGame.png@2x.png 2x, img/EndGame.png 1x" />
         <img class="end-page__logo" src="img/EndGame.png" width="516 " height="275" alt="Изображение четырех карт">
@@ -63,8 +45,9 @@
     </section>
 
   </div>
-
-  <script src="js/script.js "></script>
+  <script src="js/utils.js"></script>
+  <script src="js/card.js"></script>
+  <script src="js/game.js "></script>
 </body>
 
 </html>

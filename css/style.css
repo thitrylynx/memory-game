@@ -65,6 +65,7 @@ body {
   background: #ffffff;
   border: 0 solid black;
   border-radius: 4px;
+  cursor: pointer;
 }
 
 .start-page_button:hover {
@@ -78,9 +79,9 @@ body {
 /* Игровая страница */
 .game-page {
   display: flex;
-  display: none;
   flex-wrap: wrap;
   margin-top: 54px;
+  perspective: 900px;
 }
 
 .game-page_button {
@@ -93,10 +94,12 @@ body {
   border: 0;
   padding: 0;
   background-color: transparent;
+  cursor: pointer;
 }
 
 .game-page p {
-  margin-left: 534px;
+  margin-left: auto;
+  margin-right: 7px;
   font-size: 14px;
   font-weight: 600;
   line-height: 0px;
@@ -117,27 +120,43 @@ body {
   padding: 0;
 }
 
-.game-page_cards-list li {
+.game-page_card {
   width: 100px;
   height: 138px;
   margin-right: 7px;
   margin-top: 19px;
   list-style: none;
-  background-image: url('../img/PlayingCardBack.jpg');
   background-size: contain;
   background-repeat: no-repeat;
 }
 
+.game-page_cards-list .game-page_card--card-back[style] {
+  background-image: url('../img/PlayingCardBack.jpg') !important;
+}
+.game-page_cards-list .game-page_card--card-none[style] {
+  background-image: none !important;
+  cursor: default !important;
+}
 @media (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi), (min-resolution: 1.5dppx) {
-  .game-page_cards-list li {
-    background-image: url('../img/PlayingCardBack@2x.jpg');
+  .game-page_cards-list .game-page_card--card-back {
+    background-image: url('../img/PlayingCardBack@2x.jpg') !important;
   }
 }
 
-/* Страница счет */
+.game-page_card--card-back {
+  transform-style: preserve-3d;
+  transition: 0.5s;
+  transform: rotateY(180deg);
+}
+.game-page_card--card-open {
+  transform-style: preserve-3d;
+  transition: 0.5s;
+  transform: rotateY(-0deg);
+}
+
+/* Итоговая страница */
 
 .end-page {
-  display: none;
   margin-top: 74px;
 }
 
@@ -179,6 +198,7 @@ body {
   background: #ffffff;
   border-radius: 4px;
   border: 0;
+  cursor: pointer;
 }
 
 .end-page_button:hover {
@@ -187,4 +207,8 @@ body {
 
 .end-page_button:active {
   opacity: 0.9;
+}
+
+.hidden {
+  display: none;
 }
