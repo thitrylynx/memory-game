@@ -22,13 +22,13 @@ window.game = (function() {
 
       (function() {
         timeoutId = setTimeout(function() {
-          gameOptions.closeOrDeleteCard('', 0, 'game-page_card--card-back', 0);
+          gameOptions.closeOrDeleteCard('', 0, 'game-card--card-back', 0);
         }, 5000);
       })();
     },
 
     showCard: function(element) {
-      element.classList.remove('game-page_card--card-back');
+      element.classList.remove('game-card--card-back');
       element.setAttribute('data-card-status', 1);
       element.style.transform = 'rotate("180deg")';
     },
@@ -43,13 +43,13 @@ window.game = (function() {
        */
 
     closeOrDeleteCard: function(cardStatus, tabIndex, className, attribute) {
-      var cardListOpen = document.querySelectorAll('.game-page_card');
+      var cardListOpen = document.querySelectorAll('.game-card');
       window.card.soundCloseCard();
 
       cardListOpen.forEach(function(element) {
         var attr = element.getAttribute('data-card-status');
         if (attr == attribute) {
-          element.classList.remove('game-page_card--card-open');
+          element.classList.remove('game-card--card-open');
           element.setAttribute('data-card-status', cardStatus);
           element.setAttribute('tabindex', tabIndex);
           element.classList.add(className);
@@ -60,7 +60,7 @@ window.game = (function() {
     selectCard: function(evt) {
       var target = evt.target;
       if (
-        target.classList.contains('game-page_card--card-back') &&
+        target.classList.contains('game-card--card-back') &&
         clickability == window.utils.CLICKABILITY_STATE.ABLE
       ) {
         // проверка первой карты
@@ -68,26 +68,26 @@ window.game = (function() {
           countClick++;
           window.card.soundOpenCard();
           gameOptions.showCard(target);
-          target.classList.add('game-page_card--card-open');
+          target.classList.add('game-card--card-open');
           lastCard = target.getAttribute('data-card-id');
         } else {
           var newCard = target.getAttribute('data-card-id');
 
           // проверка соответствия с предыдущей картой
           if (lastCard == newCard) {
-            var cardsClose = cardListAll.getElementsByClassName('game-page_card--card-back').length;
+            var cardsClose = cardListAll.getElementsByClassName('game-card--card-back').length;
 
             score.textContent = +score.textContent + cardsClose * 42;
             window.card.soundOpenCard();
             gameOptions.showCard(target);
-            target.classList.add('game-page_card--card-open');
+            target.classList.add('game-card--card-open');
             clickability = window.utils.CLICKABILITY_STATE.UNABLE;
 
             setTimeout(function() {
               gameOptions.closeOrDeleteCard(
                 2,
                 '',
-                'game-page_card--card-none',
+                'game-card--card-none',
                 window.utils.COUNT_CLICK.SINGLE
               );
               clickability = window.utils.CLICKABILITY_STATE.ABLE;
@@ -96,7 +96,7 @@ window.game = (function() {
             // сокрытие несоответствующих карт
             window.card.soundOpenCard();
             gameOptions.showCard(target);
-            target.classList.add('game-page_card--card-open');
+            target.classList.add('game-card--card-open');
             clickability = window.utils.CLICKABILITY_STATE.UNABLE;
             var elems = document.querySelectorAll('[data-card-status="2"]').length;
 
@@ -110,7 +110,7 @@ window.game = (function() {
               gameOptions.closeOrDeleteCard(
                 0,
                 0,
-                'game-page_card--card-back',
+                'game-card--card-back',
                 window.utils.COUNT_CLICK.SINGLE
               );
               clickability = window.utils.CLICKABILITY_STATE.ABLE;

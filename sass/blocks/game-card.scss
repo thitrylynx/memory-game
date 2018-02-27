@@ -1,0 +1,34 @@
+/* Игральная карта */
+.game-card {
+  width: 100px;
+  height: 138px;
+  margin-right: 7px;
+  margin-top: 19px;
+  list-style: none;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.game-page_cards-list .game-card--card-back[style] {
+  background-image: url('../img/PlayingCardBack.jpg') !important;
+}
+.game-page_cards-list .game-card--card-none[style] {
+  background-image: none !important;
+  cursor: default !important;
+}
+@media (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi), (min-resolution: 1.5dppx) {
+  .game-page_cards-list .game-card--card-back {
+    background-image: url('../img/PlayingCardBack@2x.jpg') !important;
+  }
+}
+
+.game-card--card-back {
+  transform-style: preserve-3d;
+  transition: 0.5s;
+  transform: rotateY(180deg);
+}
+.game-card--card-open {
+  transform-style: preserve-3d;
+  transition: 0.5s;
+  transform: rotateY(-0deg);
+}
