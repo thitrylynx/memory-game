@@ -10,15 +10,15 @@
 }
 
 .game-page_cards-list .game-card--card-back[style] {
-  background-image: url('../img/PlayingCardBack.jpg') !important;
+  background-image: url('../img/PlayingCardBack.jpg') !important; /* Переопределение inline стилей */
 }
 .game-page_cards-list .game-card--card-none[style] {
-  background-image: none !important;
-  cursor: default !important;
+  background-image: none !important; /* Переопределение inline стилей */
+  cursor: default !important; /* Переопределение inline стилей */
 }
 @media (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi), (min-resolution: 1.5dppx) {
   .game-page_cards-list .game-card--card-back {
-    background-image: url('../img/PlayingCardBack@2x.jpg') !important;
+    background-image: url('../img/PlayingCardBack@2x.jpg') !important; /* Переопределение inline стилей */
   }
 }
 
