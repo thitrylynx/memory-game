@@ -1,0 +1,229 @@
+body {
+  font-family: 'Open Sans', 'Arial', sans-serif;
+  font-size: 15px;
+  background-color: #1c7430;
+}
+
+@font-face {
+  font-weight: normal;
+  font-family: 'Open Sans';
+  font-style: normal;
+  src: url('../fonts/opensans.woff') format('woff'), url('../fonts/opensans.woff2') format('woff2');
+}
+
+@font-face {
+  font-weight: 600;
+  font-family: 'Open Sans';
+  font-style: normal;
+  src: url('../fonts/opensanssemibold.woff') format('woff');
+}
+
+@font-face {
+  font-weight: 700;
+  font-family: 'Open Sans';
+  font-style: normal;
+  src: url('../fonts/opensansbold.woff') format('woff'),
+    url('../fonts/opensansbold.woff2') format('woff2');
+}
+@font-face {
+  font-weight: 700;
+  font-family: 'Krungthep';
+  font-style: normal;
+  src: url('../fonts/Krungthep.woff') format('woff'),
+    url('../fonts/Krungthep.woff2') format('woff2');
+}
+.wrapper {
+  width: 700px;
+  margin: 0 auto;
+}
+
+/* Главная страница */
+.start-page {
+  margin-top: 94px;
+}
+
+.start-page__logo {
+  display: block;
+  margin: 0 auto;
+}
+
+.start-page__title {
+  margin: 20px auto 34px auto;
+  opacity: 0.85;
+  font-size: 28px;
+  font-weight: bold;
+  color: #ffffff;
+  letter-spacing: 0.2px;
+  line-height: 38px;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.start-page_button {
+  display: block;
+  width: 144px;
+  height: 42px;
+  margin: 0 auto;
+  opacity: 0.85;
+  font-size: 16px;
+  font-weight: bold;
+  color: #1c7430;
+  letter-spacing: 0;
+  background: #ffffff;
+  border: 0 solid black;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.start-page_button:hover {
+  opacity: 0.5;
+}
+
+.start-page_button:active {
+  opacity: 0.9;
+}
+
+/* Игровая страница */
+.game-page {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 54px;
+  perspective: 900px;
+}
+
+.game-page_button {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 19px;
+  color: #ffffff;
+  opacity: 0.8;
+  letter-spacing: 0.25px;
+  border: 0;
+  padding: 0;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.game-page p {
+  margin-left: auto;
+  margin-right: 7px;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 0px;
+  color: #ffffff;
+  opacity: 0.8;
+  letter-spacing: 0.25px;
+}
+
+.game-page_cards-area {
+  width: 100%;
+}
+
+.game-page_cards-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 0;
+  padding: 0;
+}
+
+.game-page_score-number {
+  opacity: 0.8;
+  font-family: 'Krungthep', 'Arial', sans-serif;
+  font-size: 14px;
+  color: #ffffff;
+  letter-spacing: 0;
+}
+/* Игральная карта */
+.game-card {
+  width: 100px;
+  height: 138px;
+  margin-right: 7px;
+  margin-top: 19px;
+  list-style: none;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.game-page_cards-list .game-card--card-back[style] {
+  background-image: url('../img/PlayingCardBack.jpg') !important; /* Переопределение inline стилей  */
+}
+.game-page_cards-list .game-card--card-none[style] {
+  background-image: none !important; /* Переопределение inline стилей  */
+  cursor: default !important; /* Переопределение inline стилей  */
+}
+@media (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi), (min-resolution: 1.5dppx) {
+  .game-page_cards-list .game-card--card-back {
+    background-image: url('../img/PlayingCardBack@2x.jpg') !important; /* Переопределение inline стилей  */
+  }
+}
+
+.game-card--card-back {
+  transform-style: preserve-3d;
+  transition: 0.5s;
+  transform: rotateY(180deg);
+}
+.game-card--card-open {
+  transform-style: preserve-3d;
+  transition: 0.5s;
+  transform: rotateY(-0deg);
+}
+
+/* Итоговая страница */
+
+.end-page {
+  margin-top: 74px;
+}
+
+.end-page__logo {
+  display: block;
+  margin: 0 auto;
+}
+
+.end-page__intro,
+.end-page__score-text {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+  opacity: 0.85;
+  color: #ffffff;
+  letter-spacing: 0.15px;
+  line-height: 35px;
+  text-align: center;
+}
+
+.end-page__intro {
+  margin-top: 9px;
+}
+
+.end-page__score-text {
+  text-align: center;
+}
+
+.end-page_button {
+  display: block;
+  width: 128px;
+  height: 42px;
+  margin: 40px auto 0 auto;
+  font-size: 16px;
+  font-weight: 700;
+  color: #1c7430;
+  letter-spacing: 0;
+  opacity: 0.85;
+  background: #ffffff;
+  border-radius: 4px;
+  border: 0;
+  cursor: pointer;
+}
+
+.end-page_button:hover {
+  opacity: 0.5;
+}
+
+.end-page_button:active {
+  opacity: 0.9;
+}
+
+.hidden {
+  display: none;
+}
