@@ -26,10 +26,7 @@
     "env": {
       "browser": true
     },
-    "extends": [
-      "htmlacademy/es5",
-      "prettier"
-    ]
+    "extends": ["htmlacademy/es5", "prettier"]
   },
   "dependencies": {
     "del": "^3.0.0"

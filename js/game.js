@@ -73,7 +73,7 @@ window.game = (function() {
         } else {
           var newCard = target.getAttribute('data-card-id');
 
-          // проверка соответствия с предыдущей картой
+          // проверка соответствия предыдущей карте
           if (lastCard == newCard) {
             var cardsClose = cardListAll.getElementsByClassName('game-card--card-back').length;
 
