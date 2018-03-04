@@ -46,15 +46,15 @@ window.game = (function() {
       var cardListOpen = document.querySelectorAll('.game-card');
       window.card.soundCloseCard();
 
-      cardListOpen.forEach(function(element) {
-        var attr = element.getAttribute('data-card-status');
+      for (var i = 0; i < cardListOpen.length; i++) {
+        var attr = cardListOpen[i].getAttribute('data-card-status');
         if (attr == attribute) {
-          element.classList.remove('game-card--card-open');
-          element.setAttribute('data-card-status', cardStatus);
-          element.setAttribute('tabindex', tabIndex);
-          element.classList.add(className);
+          cardListOpen[i].classList.remove('game-card--card-open');
+          cardListOpen[i].setAttribute('data-card-status', cardStatus);
+          cardListOpen[i].setAttribute('tabindex', tabIndex);
+          cardListOpen[i].classList.add(className);
         }
-      });
+      }
     },
 
     selectCard: function(evt) {
