@@ -1,0 +1,51 @@
+/* Игровая страница */
+.game-page {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 54px;
+  perspective: 900px;
+}
+
+.game-page_button {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 19px;
+  color: $text-color;
+  opacity: 0.8;
+  letter-spacing: 0.25px;
+  border: 0;
+  padding: 0;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.game-page p {
+  margin-left: auto;
+  margin-right: 9px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 0px;
+  color: $text-color;
+  opacity: 0.8;
+  letter-spacing: 0.25px;
+}
+
+.game-page_cards-area {
+  width: 100%;
+}
+
+.game-page_cards-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 0;
+  padding: 0;
+}
+.game-page_score-number {
+  margin-left: 10px;
+  opacity: 0.8;
+  font-family: 'Krungthep', 'Arial', sans-serif;
+  font-size: 14px;
+  color: #ffffff;
+  letter-spacing: 0;
+}
