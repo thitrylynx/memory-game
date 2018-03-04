@@ -93,7 +93,7 @@ window.game = (function() {
               clickability = window.utils.CLICKABILITY_STATE.ABLE;
             }, 700);
           } else {
-            // сокрытие несоответствующих карт
+            // сокрытие карт
             window.card.soundOpenCard();
             gameOptions.showCard(target);
             target.classList.add('game-card--card-open');
